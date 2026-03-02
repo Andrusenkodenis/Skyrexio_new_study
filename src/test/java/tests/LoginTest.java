@@ -15,6 +15,7 @@ public class LoginTest extends BaseTest {
         assertTrue(productsPage.isTitleIsDisplayed(), "Заголовок не виден");
         assertEquals(productsPage.getTitle(), "Products", "Не верный заголовок");
     }
+
     @DataProvider(name = "incorrectLoginData")
     public Object[][] loginData() {
         return new Object[][]{
@@ -25,6 +26,7 @@ public class LoginTest extends BaseTest {
                 {"", "", "Epic sadface: Username is required"},
         };
     }
+
     @Test(dataProvider = "incorrectLoginData", description = "Тест проверяет, что авторизация корректно обрабатывает ошибки", invocationCount = 1)
     public void incorrectLogin(String user, String password, String errorMsg) {
         loginPage.open();
