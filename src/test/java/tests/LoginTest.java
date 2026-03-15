@@ -5,15 +5,16 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static user.UserFactory.withAdminPermission;
 
 public class LoginTest extends BaseTest {
     @Test(description = "Валидная авторизация пользователя", invocationCount = 1)
     public void correctLogin() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(withAdminPermission());
 
         assertTrue(productsPage.isTitleIsDisplayed(), "Заголовок не виден");
-        assertEquals(productsPage.getTitle(), "Products", "Не верный заголовок");
+        assertEquals(productsPage.checkTitleName(), "Products", "Не верный заголовок");
     }
 
     @DataProvider(name = "incorrectLoginData")

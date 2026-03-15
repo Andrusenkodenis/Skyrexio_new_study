@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import user.User;
 
 public class LoginPage extends BasePage {
     private final By loginInput = By.id("user-name");
@@ -18,9 +19,22 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String user, String password) {
-        browser.findElement(loginInput).sendKeys(user);
-        browser.findElement(passwordInput).sendKeys(password);
+        fillLoginField(user);
+        fillPasswordField(password);
         browser.findElement(loginButton).click();
+    }
+    public void login(User user) {
+        fillLoginField(user.getEmail());
+        fillPasswordField(user.getPassword());
+        browser.findElement(loginButton).click();
+    }
+
+    public void fillLoginField(String user) {
+        browser.findElement(loginInput).sendKeys(user);
+    }
+
+    public void fillPasswordField(String password) {
+        browser.findElement(passwordInput).sendKeys(password);
     }
 
     public boolean isErrorDisplayed() {
